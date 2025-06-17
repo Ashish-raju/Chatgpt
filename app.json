@@ -1,0 +1,60 @@
+{
+  "expo": {
+    "name": "Rider-Seeker",
+    "slug": "rider-seeker",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.riderseeker.app",
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "This app needs access to your location to show nearby rides and provide accurate pickup locations.",
+        "NSLocationAlwaysAndWhenInUseUsageDescription": "This app needs access to your location to show nearby rides and provide accurate pickup locations.",
+        "NSCameraUsageDescription": "This app needs access to your camera to take photos for your profile and KYC verification.",
+        "NSPhotoLibraryUsageDescription": "This app needs access to your photo library to select photos for your profile."
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#FFFFFF"
+      },
+      "package": "com.riderseeker.app",
+      "permissions": [
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_COARSE_LOCATION",
+        "CAMERA",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE"
+      ]
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "The app accesses your photos to let you share them with your profile.",
+          "cameraPermission": "The app accesses your camera to let you take photos for your profile and KYC verification."
+        }
+      ],
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Allow Rider-Seeker to use your location to show nearby rides and provide accurate pickup locations."
+        }
+      ]
+    ]
+  }
+}

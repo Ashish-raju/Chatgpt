@@ -1,0 +1,86 @@
+
+DateRide - MVP UI Animations & Transitions Guide
+
+-------------------------------
+🔮 Animation Principles
+-------------------------------
+- Fast-in, slow-out transitions
+- Minimal + fluid motions
+- Use blur, scale, and alpha subtly
+- Always animate state changes
+
+-------------------------------
+🖼️ Splash Screen
+-------------------------------
+- Logo: scale(0.6 → 1) + fade in (300ms)
+- Tagline: slide in from bottom + fade
+
+-------------------------------
+🔐 Login / Signup
+-------------------------------
+- Input focus: border highlight animation
+- Button press: scale down then up (1 → 0.95 → 1)
+- Errors: horizontal shake
+
+-------------------------------
+🧑 Role Selection
+-------------------------------
+- Tap: scale(1 → 1.03) + drop shadow
+- Selection pulse: subtle scale loop
+- Transition: fade unselected + slide selected up
+
+-------------------------------
+💬 Interests Selection
+-------------------------------
+- Chip tap: scale + fill color + tick icon
+- 'Next' button: slide up + fade in after 3 chips
+
+-------------------------------
+🖼️ Photo Upload
+-------------------------------
+- Add image: zoom in + bounce (scale(0 → 1))
+- Remove image: shrink to center + fade out
+- Upload: animated progress bar (left to right)
+
+-------------------------------
+🔐 KYC Upload
+-------------------------------
+- File upload: slide in preview
+- Camera snap: flash overlay (300ms)
+- Success: green tick scale-in + fade
+
+-------------------------------
+🏠 Rider & Seeker Home
+-------------------------------
+- Map pins: drop-in (translateY(-20 → 0)) + fade
+- Toggle: switch animation with glow
+- Cards: staggered fade-in with delay
+
+-------------------------------
+🧑 View Profile
+-------------------------------
+- Photo carousel: swipe + edge bounce
+- Interests icons: cascade scale-in with delay
+- Match %: animated progress fill
+
+-------------------------------
+✅ Ride Confirmation
+-------------------------------
+- Match success: heart burst animation (particles)
+- Accept button: soft pulse
+- Info cards: slide in from opposite sides
+
+-------------------------------
+⏳ Waiting Screen
+-------------------------------
+- Loader: rotating or bouncing dots
+- Fun quotes: fade loop every 4s
+
+-------------------------------
+🎨 Libraries Recommended
+-------------------------------
+- react-native-reanimated
+- react-native-animatable
+- moti
+- Lottie
+

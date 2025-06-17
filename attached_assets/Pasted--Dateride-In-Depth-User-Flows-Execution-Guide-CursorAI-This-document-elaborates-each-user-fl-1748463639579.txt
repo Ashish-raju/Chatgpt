@@ -1,0 +1,181 @@
+# 🧭 Dateride: In-Depth User Flows Execution Guide (CursorAI)
+
+This document elaborates each user flow in micro-steps for CursorAI to implement with zero ambiguity. Each flow is grouped by role and explicitly structured to ensure safe, stable development within an MVP cycle.
+
+---
+
+## 👥 1. Registration & Role-Based Onboarding Flow
+
+### 1.1 Universal Registration Flow (All Users)
+
+1. Launch app
+2. Display splash screen and branding
+3. Show phone number input
+4. On submit → send OTP via Firebase Auth
+5. User enters OTP
+6. On verification success:
+    - Navigate to **Role Selection Screen**
+
+---
+
+### 1.2 Role Selection Flow
+
+1. Show Rider vs Seeker role cards with short descriptions
+2. On role selection:
+    - Save role in user profile in Firestore
+    - Navigate to **Profile Creation**
+
+---
+
+## 👨 Rider Flow (Role: "rider")
+
+### 2.1 Rider Profile & KYC Flow
+
+1. Display profile creation form:
+    - Name, age, gender, photo upload (up to 5)
+    - Bio, hobbies, interests
+2. After profile complete → show KYC screen
+3. Rider uploads document via camera or gallery
+4. Show "Pending Verification" status
+5. Save docs to Firebase Storage + Firestore record
+
+---
+
+### 2.2 Create Ride Flow
+
+1. Rider lands on dashboard (Post-KYC verified)
+2. Show “Create Ride” CTA:
+    - Select start location (via GPS or input)
+    - Optional: set destination
+    - Confirm availability status: "Online"
+3. Ride stored in Firestore → visible to Seekers
+
+---
+
+### 2.3 Match & Ride Lifecycle (Rider View)
+
+1. Rider receives match request (Firestore listener)
+2. Show matched Seeker profile (modal or screen)
+3. Rider accepts or rejects
+4. On accept:
+    - Ride status → "Matched"
+    - Seeker notified
+    - Chat unlocked
+5. Start ride → update status: "In Progress"
+6. End ride → update status: "Completed"
+
+---
+
+### 2.4 Post-Ride Actions
+
+1. Show Seeker profile
+2. Ask: “Was it a date?”
+    - Swipe right: "Yes"
+    - Swipe left: "Just a ride"
+3. Save feedback
+4. If mutual “Yes” → no payment
+5. If not → display “Payment Completed” status
+
+---
+
+## 👩 Seeker Flow (Role: "seeker")
+
+### 3.1 Seeker Profile Setup
+
+1. Same profile setup as Rider:
+    - Name, age, gender, photos (5), bio, interests
+2. No KYC required
+3. On submit → navigate to **Ride Discovery**
+
+---
+
+### 3.2 Ride Discovery & Swipe Flow
+
+1. Home screen shows:
+    - Map View (static rides nearby)
+    - List View of available Rider cards
+2. On Rider card:
+    - Show name, photo, vehicle info, distance
+3. Seeker swipes:
+    - Right = interested
+    - Left = pass
+4. On mutual right swipe:
+    - Match created in Firestore
+    - Chat opens
+
+---
+
+### 3.3 Ride Lifecycle (Seeker View)
+
+1. After match:
+    - Seeker confirms location (if needed)
+    - Status: “Matched”
+2. Rider picks up Seeker
+3. Ride marked: “In Progress” → then “Completed”
+4. Post-ride prompt:
+    - “Was this a date?”
+    - If yes & mutual → skip payment
+    - If not → show UPI payment QR/link
+
+---
+
+### 3.4 Ratings & History
+
+1. After each ride:
+    - Store "date/ride" response
+    - Append to ride history
+2. View history screen:
+    - List of past rides with timestamp
+    - Rating + payment status
+
+---
+
+## 🔄 Shared System Logic (Both Roles)
+
+### 4.1 Chat Flow (Trigger: Match Created)
+
+1. Firestore listener detects new match
+2. Enable 1:1 chatroom between Rider and Seeker
+3. Use Firebase Realtime DB
+4. Auto-expire or archive chat after ride is completed
+
+---
+
+### 4.2 Payment Logic (Seeker-Initiated)
+
+1. Triggered post-ride if not mutual match
+2. Show fixed/static payment amount
+3. Generate UPI deep link
+4. Confirm payment manually (MVP)
+5. Update Firestore `paymentStatus = completed`
+
+---
+
+## 🧠 CursorAI Dev Instructions
+
+- Implement flows modularly: `flows/auth`, `flows/ride`, `flows/match`
+- Track `userRole` as global state
+- Use Firestore collection paths:
+    - `/users/{userId}`
+    - `/rides/{rideId}`
+    - `/matches/{matchId}`
+    - `/chats/{matchId}`
+- Always validate data writes with Firestore rules
+- Wrap every major flow in `try/catch` and return success marker comment:
+    ```ts
+    // ✅ Flow Complete: [FlowName]
+    ```
+
+---
+
+## 🔐 Notes
+
+- All phone auth must use Firebase's free tier
+- Ride location is static for MVP (not real-time)
+- Payment is UPI-only (deep link or static QR)
+- Roles must remain fixed for MVP
+
+---
+
+This document ensures CursorAI builds the Dateride app **modularly**, with stability, clear flow logic, and zero ambiguity.
+

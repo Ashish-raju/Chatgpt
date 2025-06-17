@@ -1,0 +1,78 @@
+🧩 High-Level Architecture
+
++-------------------+
+| Splash Screen     |
++-------------------+
+          ↓
++-------------------+
+| Login / Signup    |
++-------------------+
+          ↓
++-------------------+
+| Onboarding Flow   |
+| - Basic Details   |
+| - Select Interests|
+| - Select Role     |
+| - Upload Photos   |
+| - KYC (for riders)|
++-------------------+
+          ↓
++---------------------------+
+| Home Screen (based on role)|
+| - Rider Home: Seekers nearby
+| - Seeker Home: Riders nearby
++---------------------------+
+          ↓
++--------------------------+
+| Profile Cards + Matching |
+| - View profiles          |
+| - Match % based on tags  |
+| - Select ride → confirm  |
++--------------------------+
+          ↓
++---------------------------+
+| Confirmation Flow         |
+| - Seeker sends ride request|
+| - Rider confirms          |
+| - Both see “waiting” page |
++---------------------------+
+          ↓
++--------------------------+
+| Ride In Progress Screen  |
+| - Ride status (optional) |
+| - End Ride                |
++--------------------------+
+🧬 Core Roles and Journeys
+
+👨 Rider Flow:
+Step	Screen	Purpose
+1	Onboarding → Select Rider	Sets user as male, driver
+2	Upload KYC (license, photo)	Safety + authenticity
+3	Rider Home	Shows nearby seekers
+4	View Profile	Detailed seeker bio
+5	Confirm Ride	Accepts match request
+6	Waiting Screen	Awaiting seeker confirmation
+7	Ride In Progress	Optional
+👩 Seeker Flow:
+Step	Screen	Purpose
+1	Onboarding → Select Seeker	Sets user as female, seeker
+2	Upload photos + interests	Set up for matchmaking
+3	Seeker Home	Shows nearby Riders
+4	View Profile	Detailed rider bio
+5	Send Ride Request	Initiates ride
+6	Waiting Screen	Awaiting rider confirmation
+7	Ride In Progress	Optional
+🔍 Matching Algorithm (Basic MVP)
+
+Match % = (Number of shared interests) / (Total selected by seeker) × 100
+
+You can scale it later with:
+Mutual likes
+Past rides
+Behavior signals
+AI personality match
+🔐 Safety Features (MVP + Scalable Ideas)
+
+✅ KYC for Riders (license, Aadhar, selfie)
+🕵️ Option to report/block rider after ride
+🧍‍♀️ Option to share ride with emergency contact (post-MVP)
